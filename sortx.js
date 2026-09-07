@@ -45,6 +45,7 @@ if (args.includes("-h") || args.includes("--help")) {
 if (args.length < 2) {
     error("deben especificarse el archivo de origen y el archivo de destino.");
 }
+//primer commit
 const origen = args[0];
 const destino = args[1];
 const criterios = [];
@@ -77,6 +78,7 @@ for (let i = 2; i < args.length; i++) {
 if (criterios.length === 0) {
     error("no se especificó ningún criterio --by.");
 }
+//segundo commit
 let contenido;
 try {
     contenido = fs.readFileSync(origen, "utf8");
@@ -103,6 +105,7 @@ for (let i = 0; i < filas.length; i++) {
         );
     }
 }
+//tercer commit
 let encabezado = null;
 let datos = filas;
 if (!noHeader) {
@@ -146,6 +149,7 @@ const criteriosProcesados = criterios.map(criterio => {
         orden
     };
 });
+//cuarto commit
 function comparar(a, b) {
     for (const criterio of criteriosProcesados) {
         const valorA = a[criterio.indice].trim();
@@ -174,7 +178,6 @@ function comparar(a, b) {
     }
     return 0;
 }
-
 datos.sort(comparar);
 const resultado = [];
 if (encabezado !== null) {
@@ -188,3 +191,4 @@ try {
 } catch (e) {
     error(`no se puede escribir el archivo de destino "${destino}".`);
 }
+//quinto commit
