@@ -131,6 +131,7 @@ function obtenerIndiceCampo(campo) {
 }
 const criteriosProcesados = criterios.map(criterio => {
     const partes = criterio.split(":");
+
     if (partes.length > 3 || partes[0] === "") {
         error(`criterio inválido: "${criterio}".`);
     }
