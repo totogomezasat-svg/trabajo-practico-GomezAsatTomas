@@ -45,9 +45,9 @@ if (args.includes("-h") || args.includes("--help")) {
 if (args.length < 2) {
     error("deben especificarse el archivo de origen y el archivo de destino.");
 }
-//primer commit
+//primer commit-Agrega validaciones del archivo de origen  
 const origen = args[0];
-const destino = args[1];
+const destino = args[1];    
 const criterios = [];
 let delimiter = ",";
 let noHeader = false;
@@ -78,7 +78,7 @@ for (let i = 2; i < args.length; i++) {
 if (criterios.length === 0) {
     error("no se especificó ningún criterio --by.");
 }
-//segundo commit
+//segundo commit-Agrega validación de argumentos y opciones
 let contenido;
 try {
     contenido = fs.readFileSync(origen, "utf8");
@@ -105,7 +105,7 @@ for (let i = 0; i < filas.length; i++) {
         );
     }
 }
-//tercer commit
+//tercer commit-Agrega validación de cantidad de campos
 let encabezado = null;
 let datos = filas;
 if (!noHeader) {
@@ -149,7 +149,7 @@ const criteriosProcesados = criterios.map(criterio => {
         orden
     };
 });
-//cuarto commit
+//cuarto commit-Agrega validación de criterios de ordenamiento
 function comparar(a, b) {
     for (const criterio of criteriosProcesados) {
         const valorA = a[criterio.indice].trim();
@@ -191,4 +191,4 @@ try {
 } catch (e) {
     error(`no se puede escribir el archivo de destino "${destino}".`);
 }
-//quinto commit
+//quinto commit-Agrega ordenamiento y generación del archivo de salida
