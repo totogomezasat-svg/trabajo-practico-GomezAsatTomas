@@ -155,14 +155,18 @@ function comparar(a, b) {
     for (const criterio of criteriosProcesados) {
         const valorA = a[criterio.indice].trim();
         const valorB = b[criterio.indice].trim();
+
         let resultado = 0;
+
         if (criterio.tipo === "num") {
             if (valorA === "" || !Number.isFinite(Number(valorA))) {
                 error(`el criterio numérico encontró un valor no numérico: "${valorA}".`);
             }
+
             if (valorB === "" || !Number.isFinite(Number(valorB))) {
                 error(`el criterio numérico encontró un valor no numérico: "${valorB}".`);
             }
+
             const numeroA = Number(valorA);
             const numeroB = Number(valorB);
             if (numeroA < numeroB) resultado = -1;
@@ -173,23 +177,29 @@ function comparar(a, b) {
                 sensitivity: "base"
             });
         }
+
         if (resultado !== 0) {
             return criterio.orden === "desc" ? -resultado : resultado;
         }
     }
+
     return 0;
 }
 datos.sort(comparar);
+
 const resultado = [];
+
 if (encabezado !== null) {
     resultado.push(encabezado.join(delimiter));
 }
+
 for (const fila of datos) {
     resultado.push(fila.join(delimiter));
 }
+
 try {
     fs.writeFileSync(destino, resultado.join("\n"), "utf8");
 } catch (e) {
     error(`no se puede escribir el archivo de destino "${destino}".`);
 }
-//quinto commit-Agrega ordenamiento y generación del archivo de salida
+//quinto commit-generación del archivo de salida
